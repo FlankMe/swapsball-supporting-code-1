@@ -166,11 +166,11 @@ linearModel.fit(X.values, y.values)
 
 XTest = delta_df[-nPredictions:].drop(target, axis=1).copy()   
 yTest = delta_df[-nPredictions:][target].copy()      
-y_at = linearModel.predict(XTest.values)
+y_hat = linearModel.predict(XTest.values)
 
 # Plot results
 fig = plt.figure(figsize=(9,6))
-plt.scatter(yTest.values, y_at)  
+plt.scatter(yTest.values, y_hat)  
 plt.plot(np.arange(yTest.values.min(), yTest.values.max()), 
          np.arange(yTest.values.min(), yTest.values.max()), 'r')
 plt.title("Scatter plot of predicted moves vs actual moves (in bps)")
@@ -179,7 +179,7 @@ plt.ylabel("Predicted moves")
 plt.show(fig)
 
 fig = plt.figure(figsize=(6,4))
-residuals = y_at - yTest.values
+residuals = y_hat - yTest.values
 stats.probplot(residuals, dist='norm', plot=plt)
 plt.title("Normal QQ plot of residuals")
 plt.show(fig)
